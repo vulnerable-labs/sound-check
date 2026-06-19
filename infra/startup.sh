@@ -9,7 +9,13 @@ REPO_URL="https://github.com/vulnerable-labs/sound-check.git"
 DEST_DIR="/opt/soundcheck"
 
 # ------------------------------------------------------------
-# 0. Clone the repository (or pull latest changes)
+# 0. Install required packages (must happen before git clone)
+# ------------------------------------------------------------
+apt-get update
+DEBIAN_FRONTEND=noninteractive apt-get install -y nginx php-fpm php-cli icecast2 ffmpeg ufw git
+
+# ------------------------------------------------------------
+# 1. Clone the repository (or pull latest changes)
 # ------------------------------------------------------------
 if [ ! -d "$DEST_DIR/.git" ]; then
     echo "[+] Cloning SoundCheck lab repository..."
@@ -20,12 +26,6 @@ else
 fi
 
 cd "$DEST_DIR"
-
-# ------------------------------------------------------------
-# 1. Install required packages
-# ------------------------------------------------------------
-apt-get update
-DEBIAN_FRONTEND=noninteractive apt-get install -y nginx php-fpm php-cli icecast2 ffmpeg ufw git
 
 # ------------------------------------------------------------
 # 2. Deploy Nginx configuration

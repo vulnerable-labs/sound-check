@@ -2,19 +2,135 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>SoundCheck – Retail & Fitness Studio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundCheck | Premium Audio Architecture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        body {font-family: Arial, sans-serif; background: #f4f4f4; margin:0; padding:2rem;}
-        .container {max-width: 800px; margin:auto; background:#fff; padding:2rem; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);}
-        h1 {color:#2c3e50;}
-        p {line-height:1.6;}
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(20, 25, 40, 0.6);
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --accent-1: #8b5cf6;
+            --accent-2: #ec4899;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.15), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(236, 72, 153, 0.15), transparent 25%);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .ambient-orb {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.3;
+            animation: float 20s infinite alternate ease-in-out;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0% { transform: translate(-10%, -10%) scale(1); }
+            100% { transform: translate(10%, 10%) scale(1.2); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            margin: 2rem;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 4rem;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeUp 1s ease-out forwards;
+        }
+
+        @keyframes fadeUp {
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            font-weight: 300;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-inline: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 15px -3px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(139, 92, 246, 0.4);
+            filter: brightness(1.1);
+        }
+        
+        .note {
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            color: rgba(148, 163, 184, 0.6);
+        }
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>Welcome to SoundCheck</h1>
-    <p>We provide a seamless background‑music and public‑address system for retail chains and fitness studios. Our platform lets you manage playlists, schedule announcements, and keep the atmosphere just right.</p>
-    <p>For more information, contact our support team.</p>
-</div>
+    <div class="ambient-orb"></div>
+    <div class="container">
+        <h1>Welcome to <span class="highlight">SoundCheck</span></h1>
+        <p>We provide a seamless background-music and public address architecture for premium retail chains and exclusive fitness studios. Elevate your brand's atmosphere.</p>
+        <a href="http://<?php echo $_SERVER['SERVER_ADDR'] ?? '127.0.0.1'; ?>:8000/login.php" class="btn" onclick="window.location.port='8000'; window.location.pathname='/login.php'; return false;">Staff Portal</a>
+        <div class="note">Authorized personnel only.</div>
+    </div>
 </body>
 </html>

@@ -40,12 +40,22 @@ systemctl restart nginx
 # 3. Deploy PHP application & Marketing Site
 # ------------------------------------------------------------
 mkdir -p /var/www/soundcheck/html
+mkdir -p /var/www/soundcheck/playlists
+
 # Copy PHP application
 cp -r $(pwd)/app/soundcheck/* /var/www/soundcheck/
 # Copy Marketing site (HTML)
 cp -r $(pwd)/app/nginx/html/* /var/www/soundcheck/html/
-chown -R www-data:www-data /var/www/soundcheck
-chmod -R 755 /var/www/soundcheck
+
+# Configure PHP-FPM to run as root (Intentional vulnerability as per spec)
+sed -i 's/user = www-data/user = root/g' /etc/php/8.1/fpm/pool.d/www.conf
+sed -i 's/group = www-data/group = root/g' /etc/php/8.1/fpm/pool.d/www.conf
+sed -i 's/ExecStart=\(.*\)/ExecStart=\1 -R/g' /lib/systemd/system/php8.1-fpm.service
+systemctl daemon-reload
+systemctl restart php8.1-fpm
+
+chown -R root:root /var/www/soundcheck
+chmod -R 777 /var/www/soundcheck
 
 # ------------------------------------------------------------
 # 4. Deploy systemd service for PA sync (runs as root)

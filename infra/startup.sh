@@ -70,7 +70,7 @@ systemctl start pa-sync.service
 # ------------------------------------------------------------
 # 5. Generate static flags (random tokens) – executed once on first boot
 # ------------------------------------------------------------
-$(pwd)/scripts/generate_flags.sh
+bash $(pwd)/scripts/generate_flags.sh
 
 # ------------------------------------------------------------
 # 6. Open firewall for required ports

@@ -37,10 +37,13 @@ rm -f /etc/nginx/sites-enabled/default
 systemctl restart nginx
 
 # ------------------------------------------------------------
-# 3. Deploy PHP application
+# 3. Deploy PHP application & Marketing Site
 # ------------------------------------------------------------
-mkdir -p /var/www/soundcheck
+mkdir -p /var/www/soundcheck/html
+# Copy PHP application
 cp -r $(pwd)/app/soundcheck/* /var/www/soundcheck/
+# Copy Marketing site (HTML)
+cp -r $(pwd)/app/nginx/html/* /var/www/soundcheck/html/
 chown -R www-data:www-data /var/www/soundcheck
 chmod -R 755 /var/www/soundcheck
 

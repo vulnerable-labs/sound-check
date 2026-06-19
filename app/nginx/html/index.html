@@ -129,7 +129,7 @@
     <div class="container">
         <h1>Welcome to <span class="highlight">SoundCheck</span></h1>
         <p>We provide a seamless background-music and public address architecture for premium retail chains and exclusive fitness studios. Elevate your brand's atmosphere.</p>
-        <a href="http://<?php echo $_SERVER['SERVER_ADDR'] ?? '127.0.0.1'; ?>:8000/login.php" class="btn" onclick="window.location.port='8000'; window.location.pathname='/login.php'; return false;">Staff Portal</a>
+        <button onclick="window.location.href = window.location.protocol + '//' + window.location.hostname + ':8000/login.php'" class="btn" style="border:none; cursor:pointer; font-family:inherit; font-size:1rem;">Staff Portal</button>
         <div class="note">Authorized personnel only.</div>
     </div>
 </body>
